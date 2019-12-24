@@ -54,15 +54,30 @@ const ownerId = getOption('ownerId', 'EXT_OWNER_ID');
 const secret = Buffer.from(getOption('secret', 'EXT_SECRET'), 'base64');
 const clientId = getOption('clientId', 'EXT_CLIENT_ID');
 
+
+// ----------- HEROKU ENVIRONMENT -----------
+// const serverOptions = {
+//   host: '0.0.0.0',
+//   port: +process.env.PORT,
+//   routes: {
+//     cors: {
+//       origin: ['*'],
+//     },
+//   },
+// };
+
+// ----------- LOCAL ENVIRONMENT -----------
 const serverOptions = {
-  host: '0.0.0.0',
-  port: +process.env.PORT,
+  host: 'localhost',
+  port: 8081,
   routes: {
     cors: {
       origin: ['*'],
     },
   },
 };
+
+
 const serverPathRoot = path.resolve(__dirname, '..', 'conf', 'server');
 if (fs.existsSync(serverPathRoot + '.crt') && fs.existsSync(serverPathRoot + '.key')) {
   serverOptions.tls = {

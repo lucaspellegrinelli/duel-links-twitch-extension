@@ -4,11 +4,21 @@ function set_auth(token) {
   });
 }
 
+// ----------- HEROKU ENVIRONMENT -----------
+// function create_request(type, method, options, success) {
+//   return {
+//     type: type,
+//     url: 'https://duel-links-twitch-extension.herokuapp.com/deck/' + method + options,
+//     success: success,
+//     error: log_error
+//   }
+// }
+
+// ----------- LOCAL ENVIRONMENT -----------
 function create_request(type, method, options, success) {
-  console.log('https://duel-links-twitch-extension.herokuapp.com/deck/' + method + options);
   return {
     type: type,
-    url: 'https://duel-links-twitch-extension.herokuapp.com/deck/' + method + options,
+    url: location.protocol + '//localhost:8081/deck/' + method + options,
     success: success,
     error: log_error
   }
