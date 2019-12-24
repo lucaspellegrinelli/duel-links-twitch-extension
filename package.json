@@ -1,17 +1,17 @@
 {
-  "name": "extension-hello-world",
-  "version": "1.0.0",
-  "description": "Simple Hello World Twitch Extension",
+  "name": "duel-links-twitch-extension",
+  "version": "0.0.1",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "cert": "node bin/generate_cert.js server",
-    "start": "node services/backend"
+    "start": "node services/backend -c \"w1ftsfbmgyeebwfa503m3gwv5ayd4t\" -s \"Tb2tMIo/Kr1nxUiZNAUb2IyMPZS4TBqZMh9NyEaAaho=\" -o \"85kqcpxvjscp2fw3d9e2r8t7hnoqv0\""
   },
   "keywords": [
     "twitch",
     "extension"
   ],
-  "author": "Emily Rose <amorelandra@twitch.tv>",
+  "author": "Lucas 'pll' Pellegrinelli <lucas.pellegrinelli@hotmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
     "boom": "^7.2.0",

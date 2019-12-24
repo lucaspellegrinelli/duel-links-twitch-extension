@@ -5,9 +5,10 @@ function set_auth(token) {
 }
 
 function create_request(type, method, options, success) {
+  console.log('https://duel-links-twitch-extension.herokuapp.com/deck/' + method + options);
   return {
     type: type,
-    url: location.protocol + '//localhost:8081/deck/' + method + options,
+    url: 'https://duel-links-twitch-extension.herokuapp.com/deck/' + method + options,
     success: success,
     error: log_error
   }
