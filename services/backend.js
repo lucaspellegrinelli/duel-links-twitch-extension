@@ -55,8 +55,8 @@ const secret = Buffer.from(getOption('secret', 'EXT_SECRET'), 'base64');
 const clientId = getOption('clientId', 'EXT_CLIENT_ID');
 
 const serverOptions = {
-  host: 'localhost',
-  port: 8081,
+  host: 'https://duel-links-twitch-extension.herokuapp.com/backend/',
+  port: 80,
   routes: {
     cors: {
       origin: ['*'],
