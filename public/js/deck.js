@@ -42,22 +42,25 @@ Deck.prototype.from_plain_text = function(deck_txt){
   if(deck_txt == undefined || deck_txt.length == 0) return;
   deck_txt = deck_txt.toLowerCase();
   if(!deck_txt.includes('extra')) deck_txt += "\nextra\n"
-  deck_txt = deck_txt.replace("/^\s*[\r\n]/gm", "");
 
   deck_lines = deck_txt.split("main")[1].split("extra")[0].split("\n").slice(1, -1);
-  extra_lines = deck_txt.split("extra")[1].split("\n").slice(1, -1);
+  extra_lines = deck_txt.split("extra")[1].split("\n").slice(1);
 
   let ctx = this;
   deck_lines.forEach(function(line){
-    ctx.main.push({
-      "name": line.substring(2), "amount": parseInt(line.charAt(0))
-    });
+    if(line.replace("/^\s*[\r\n]/gm", "").length > 0){
+      ctx.main.push({
+        "name": line.substring(2), "amount": parseInt(line.charAt(0))
+      });
+    }
   });
 
   extra_lines.forEach(function(line){
-    ctx.extra.push({
-      "name": line.substring(2), "amount": parseInt(line.charAt(0))
-    });
+    if(line.replace("/^\s*[\r\n]/gm", "").length > 0){
+      ctx.extra.push({
+        "name": line.substring(2), "amount": parseInt(line.charAt(0))
+      });
+    }
   });
 };
 
