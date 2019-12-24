@@ -6,15 +6,31 @@
 <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
     <div id="app"></div>
     <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
-    <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="js/libraries/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="js/util.js" type="text/javascript"></script>
     <script src="js/deck.js" type="text/javascript"></script>
     <script src="js/general.js" type="text/javascript"></script>
     <script src="js/config.js" type="text/javascript"></script>
-    <h2>Configure the deck</h2>
 
-    <textarea rows="15" cols="50" id="deck-text"></textarea>
-    <br/>
-    <input type="button" id="set-deck" disabled="disabled" value="Set Deck" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="css/config.css">
+
+    <div class="container" style="width: 33vw;">
+      <h4>Deck Editor</h4>
+      <h5>Main Deck</h5>
+      <div id="main-deck-list"></div>
+      <h5>Extra Deck</h5>
+      <div id="extra-deck-list"></div>
+      <hr style="margin:10px;"/>
+      <div class="row">
+        <div class="six columns">
+          <input class="u-full-width button-primary" type="submit" id="set-deck" value="Publish">
+        </div>
+        <div class="six columns">
+          <input class="u-full-width" type="submit" id="clear-deck" value="Clear">
+        </div>
+      </div>
+    </div>
 </body>
 </html>
