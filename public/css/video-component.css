@@ -9,13 +9,13 @@
 
 .card-content{
   display: none;
-  padding: 15px;
+  padding: 10px;
   position: absolute;
   background-color: #f1f1f1;
   text-align: center;
   width: 200px;
   word-break: keep-all;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   -webkit-transform: translate(-25%, 0);
@@ -39,7 +39,7 @@
 .deck-title{
   margin: 0;
   margin-bottom: 0.5rem;
-  font-size: 2rem;
+  font-size: 3rem;
   color: #ffffff;
   font-weight: bold;
 }
@@ -47,7 +47,13 @@
 .extra-deck-title{
   margin: 0;
   margin-bottom: 0.5rem;
-  font-size: 2rem;
+  font-size: 3rem;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.no-card-warning-text{
+  font-size: 2.5rem;
   color: #ffffff;
   font-weight: bold;
 }

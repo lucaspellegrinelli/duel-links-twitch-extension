@@ -40,21 +40,14 @@ function update_deck_doms(unified_deck){
   let card_index = 0;
   unified_deck.forEach(function(element, index, array){
     for(let i = 0; i < element.amount; i++){
-      let img_dom = $("<div>", {class: "card-dropdown"});
-      img_dom.append(
-        $("<img>", {
-          id: "card" + card_index,
-          class: "card-img",
-          src: element.image
-        })
-      )
+      let img_dom = $("<div>", { class: "card-dropdown" });
 
-      img_dom.append(
-        $("div", {
-          class: "card-content",
-          html: element.name
-        })
-      )
+      let image = $("<img>", { id: "card" + card_index, class: "card-img", src: element.image });
+      image.appendTo(img_dom);
+
+      let dropdown = $("<div>", { class: "card-content" });
+      dropdown.html(element.name);
+      dropdown.appendTo(img_dom);
 
       if(element.main) img_dom.appendTo("#card-row" + Math.floor(card_index / cards_in_row));
       else img_dom.appendTo("#extra-card-row");
