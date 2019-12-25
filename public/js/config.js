@@ -65,24 +65,12 @@ function update_requests(){
   let deck_info_req = new DeckInfoRequester(deck);
   deck_info_req.request_info(function(unified_deck){
     send_deck_request(deck);
-    $("#feedback-message").html("Success");
-    $("#feedback-message").css("display", "block");
-    $("#feedback-message").css("background-color", "#2ecc71");
-    $('#set-deck').attr("class", "u-full-width button-primary")
-    $('#set-deck').removeAttr('disabled');
-    setTimeout(function(){
-      $("#feedback-message").css("display", "none");
-    }, 7500);
+    enable_set_button();
+    show_success_label();
   },
   function(failed_card){
-    $("#feedback-message").html("Couldn't find \"" + failed_card.name + "\"");
-    $("#feedback-message").css("display", "block");
-    $("#feedback-message").css("background-color", "#e74c3c");
-    $('#set-deck').attr("class", "u-full-width button-primary")
-    $('#set-deck').removeAttr('disabled');
-    setTimeout(function(){
-      $("#feedback-message").css("display", "none");
-    }, 7500);
+    enable_set_button();
+    show_failed_label();
   });
 }
 
@@ -116,15 +104,40 @@ function update_deck_text(deck_json) {
   update_card_items("extra");
 }
 
+function show_success_label(){
+  $("#feedback-message").html("Success");
+  $("#feedback-message").css("display", "block");
+  $("#feedback-message").css("background-color", "#2ecc71");
+  setTimeout(function(){
+    $("#feedback-message").css("display", "none");
+  }, 7500);
+}
+
+function show_failed_label(card){
+  $("#feedback-message").html("Couldn't find \"" + failed_card.name + "\"");
+  $("#feedback-message").css("display", "block");
+  $("#feedback-message").css("background-color", "#e74c3c");
+  setTimeout(function(){
+    $("#feedback-message").css("display", "none");
+  }, 7500);
+}
+
+function disable_set_button(){
+  $('#set-deck').attr("class", "u-full-width")
+  $('#set-deck').attr('disabled', 'disabled');
+}
+
+function enable_set_button(){
+  $('#set-deck').attr("class", "u-full-width button-primary")
+  $('#set-deck').removeAttr('disabled');
+}
+
 twitch.onContext((context) => { });
 
 twitch.onAuthorized((auth) => {
   token = auth.token;
   userId = auth.userId;
-
-  $('#set-deck').attr("class", "u-full-width button-primary")
-  $('#set-deck').removeAttr('disabled');
-
+  enable_set_button();
   set_auth(token);
   $.ajax(requests.get);
 });
@@ -145,8 +158,7 @@ $(function(){
 
   $("#set-deck").click(function(){
     if(!token) return twitch.rig.log('Not authorized');
-    $('#set-deck').attr("class", "u-full-width")
-    $('#set-deck').attr('disabled', 'disabled');
+    disable_set_button();
     update_requests();
   });
 });
