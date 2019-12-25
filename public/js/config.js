@@ -7,7 +7,9 @@ let target_dom = {
   "extra": "#extra-deck-list"
 }
 
-var requests = { };
+var requests = {
+  get: create_request('GET', 'query', "", update_deck_text)
+};
 
 function update_card_items(which_deck){
   $(target_dom[which_deck]).children().each(function(){
@@ -60,6 +62,17 @@ function update_requests(){
     }
   });
 
+  let deck_info_req = new DeckInfoRequester(deck);
+  deck_info_req.request_info(function(unified_deck){
+    send_deck_request(deck);
+    $("#feedback-message").html("Success");
+  },
+  function(failed_card){
+    $("#feedback-message").html("Couldn't find \"" + failed_card.name + "\"");
+  });
+}
+
+function send_deck_request(deck){
   let encoded_deck = '?deck=' + encodeURI(deck.to_json());
 
   requests = {
@@ -68,6 +81,7 @@ function update_requests(){
   };
 
   set_auth(token);
+  $.ajax(requests.set);
 }
 
 function update_deck_text(deck_json) {
@@ -97,7 +111,7 @@ twitch.onAuthorized((auth) => {
   $('#set-deck').attr("class", "u-full-width button-primary")
   $('#set-deck').removeAttr('disabled');
 
-  update_requests();
+  set_auth(token);
   $.ajax(requests.get);
 });
 
@@ -118,6 +132,5 @@ $(function(){
   $("#set-deck").click(function(){
     if(!token) return twitch.rig.log('Not authorized');
     update_requests();
-    $.ajax(requests.set);
   });
 });

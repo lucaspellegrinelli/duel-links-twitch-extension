@@ -27,7 +27,7 @@ DeckInfoRequester.prototype.request_callback = function(card, index, json, done_
   }
 }
 
-DeckInfoRequester.prototype.request_info = function(done_callback){
+DeckInfoRequester.prototype.request_info = function(done_callback, fail_callback){
   let ctx = this;
   this.deck.forEach(function(card, index){
     let card_name = capitalize(card.name);
@@ -35,6 +35,9 @@ DeckInfoRequester.prototype.request_info = function(done_callback){
     $.getJSON(request_url, function(){ })
       .done(function(json){
         ctx.request_callback(card, index, json, done_callback);
+      })
+      .fail(function(){
+        fail_callback(card);
       });
   });
 }

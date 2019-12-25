@@ -56,26 +56,26 @@ const clientId = getOption('clientId', 'EXT_CLIENT_ID');
 
 
 // ----------- HEROKU ENVIRONMENT -----------
-const serverOptions = {
-  host: '0.0.0.0',
-  port: +process.env.PORT,
-  routes: {
-    cors: {
-      origin: ['*'],
-    },
-  },
-};
-
-// ----------- LOCAL ENVIRONMENT -----------
 // const serverOptions = {
-//   host: 'localhost',
-//   port: 8081,
+//   host: '0.0.0.0',
+//   port: +process.env.PORT,
 //   routes: {
 //     cors: {
 //       origin: ['*'],
 //     },
 //   },
 // };
+
+// ----------- LOCAL ENVIRONMENT -----------
+const serverOptions = {
+  host: 'localhost',
+  port: 8081,
+  routes: {
+    cors: {
+      origin: ['*'],
+    },
+  },
+};
 
 
 const serverPathRoot = path.resolve(__dirname, '..', 'conf', 'server');
