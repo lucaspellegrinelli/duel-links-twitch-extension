@@ -29,12 +29,12 @@ function update_deck_doms(unified_deck){
     else extra_deck_size += card.amount;
   });
 
-  for(var i = 0; i < Math.ceil(main_deck_size / cards_in_row); i++){
-    $('<div class="card-row" id="card-row' + i + '">').appendTo("#deck-display");
+  for(let i = 0; i < Math.ceil(main_deck_size / cards_in_row); i++){
+    $('<div class="card-row">').appendTo("#deck-display");
   }
 
   if(extra_deck_size > 0){
-    $('<div class="card-row" id="extra-card-row">').appendTo("#extra-deck-display");
+    $('<div class="card-row">').appendTo("#extra-deck-display");
   }
 
   let card_index = 0;
@@ -42,15 +42,16 @@ function update_deck_doms(unified_deck){
     for(let i = 0; i < element.amount; i++){
       let img_dom = $("<div>", { class: "card-dropdown" });
 
-      let image = $("<img>", { id: "card" + card_index, class: "card-img", src: element.image });
+      let image = $("<img>", { class: "card-img", src: element.image });
       image.appendTo(img_dom);
 
       let dropdown = $("<div>", { class: "card-content" });
       dropdown.html(element.name);
       dropdown.appendTo(img_dom);
 
-      if(element.main) img_dom.appendTo("#card-row" + Math.floor(card_index / cards_in_row));
-      else img_dom.appendTo("#extra-card-row");
+      let target_row = Math.floor(card_index / cards_in_row);
+      if(element.main) img_dom.appendTo($("#deck-display").children(".card-row").eq(target_row));
+      else img_dom.appendTo($("#extra-deck-display").children(".card-row").eq(0));
       card_index++;
     }
   });

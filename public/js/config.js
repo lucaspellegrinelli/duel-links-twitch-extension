@@ -23,7 +23,7 @@ function update_card_items(which_deck){
 }
 
 function add_card_item(which_deck, name="", amount=3){
-  let html = '<li><div class="row card-item"><div style="margin-right:3%;" class="one columns"><img src="icons/baseline_unfold_more_black_18dp.png"/></div><div class="three columns"><input class="u-full-width" type="number" value="' + amount + '"></div><div class="seven columns"><input class="u-full-width" type="text" value="' + name + '" placeholder="Card Name"></div></div></li>';
+  let html = '<li><div class="row card-item"><div style="margin-right:3%;" class="one columns"><img src="icons/baseline_unfold_more_white_18dp.png"/></div><div class="three columns"><input class="u-full-width" type="number" value="' + amount + '"></div><div class="seven columns"><input class="u-full-width" type="text" value="' + name + '" placeholder="Card Name"></div></div></li>';
   $(html).focusout(function(){
     update_card_items(which_deck);
   }).appendTo(target_dom[which_deck]);
@@ -70,7 +70,7 @@ function update_requests(){
   },
   function(failed_card){
     enable_set_button();
-    show_failed_label();
+    show_failed_label(failed_card);
   });
 }
 
@@ -114,7 +114,7 @@ function show_success_label(){
 }
 
 function show_failed_label(card){
-  $("#feedback-message").html("Couldn't find \"" + failed_card.name + "\"");
+  $("#feedback-message").html("Couldn't find \"" + card.name + "\"");
   $("#feedback-message").css("display", "block");
   $("#feedback-message").css("background-color", "#e74c3c");
   setTimeout(function(){

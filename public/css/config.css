@@ -1,3 +1,32 @@
+.config-container{
+  background-color: #18181b;
+  border-width: 2px;
+  padding: 25px;
+  color: #ffffff;
+}
+
+.button-primary{
+  color: #18181b !important;
+}
+
+.config-container input[type="submit"]{
+  color: #ffffff;
+}
+
+.config-container input[type="submit"]:hover{
+  color: #b3b3b3;
+}
+
+.config-container input[type="text"]{
+  background-color : #26262c;
+  border-color: #3c3c42;
+}
+
+.config-container input[type="number"]{
+  background-color : #26262c;
+  border-color: #3c3c42;
+}
+
 li{
   margin-bottom: 1rem;
 }
@@ -14,6 +43,12 @@ ul {
   width: 100%;
   height: 40px;
   line-height: 40px;
-  color: #ffffff;
+  color: #18181b;
   background-color: #2ecc71;
+}
+
+.deck-title{
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 15px !important;
 }
