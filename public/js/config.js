@@ -66,9 +66,23 @@ function update_requests(){
   deck_info_req.request_info(function(unified_deck){
     send_deck_request(deck);
     $("#feedback-message").html("Success");
+    $("#feedback-message").css("display", "block");
+    $("#feedback-message").css("background-color", "#2ecc71");
+    $('#set-deck').attr("class", "u-full-width button-primary")
+    $('#set-deck').removeAttr('disabled');
+    setTimeout(function(){
+      $("#feedback-message").css("display", "none");
+    }, 7500);
   },
   function(failed_card){
     $("#feedback-message").html("Couldn't find \"" + failed_card.name + "\"");
+    $("#feedback-message").css("display", "block");
+    $("#feedback-message").css("background-color", "#e74c3c");
+    $('#set-deck').attr("class", "u-full-width button-primary")
+    $('#set-deck').removeAttr('disabled');
+    setTimeout(function(){
+      $("#feedback-message").css("display", "none");
+    }, 7500);
   });
 }
 
@@ -131,6 +145,8 @@ $(function(){
 
   $("#set-deck").click(function(){
     if(!token) return twitch.rig.log('Not authorized');
+    $('#set-deck').attr("class", "u-full-width")
+    $('#set-deck').attr('disabled', 'disabled');
     update_requests();
   });
 });
