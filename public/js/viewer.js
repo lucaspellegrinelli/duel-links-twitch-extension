@@ -7,7 +7,13 @@ var requests = {
   get: create_request('GET', 'query', "", update_deck)
 };
 
+function reset_deck(){
+  $("#deck-display").html('<p class="deck-title">MAIN DECK</p>');
+  $("#extra-deck-display").html('<p class="extra-deck-title">EXTRA DECK</p>');
+}
+
 function update_deck(deck_json){
+  reset_deck();
   let deck = Deck.from_json(deck_json);
   let deck_info_req = new DeckInfoRequester(deck);
   deck_info_req.request_info(update_deck_doms);
@@ -19,8 +25,8 @@ function update_deck_doms(unified_deck){
   let extra_deck_size = 0;
 
   unified_deck.forEach(function(card){
-    if(card.main) main_deck_size++;
-    else extra_deck_size++;
+    if(card.main) main_deck_size += card.amount;
+    else extra_deck_size += card.amount;
   });
 
   for(var i = 0; i < Math.ceil(main_deck_size / cards_in_row); i++){
@@ -67,4 +73,10 @@ twitch.onAuthorized((auth) => {
 
   set_auth(token);
   $.ajax(requests.get);
+});
+
+$(function() {
+  twitch.listen('broadcast', function (target, content_type, deck) {
+    update_deck(deck);
+  });
 });

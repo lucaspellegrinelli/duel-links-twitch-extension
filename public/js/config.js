@@ -27,13 +27,15 @@ function update_card_items(which_deck){
   add_card_item(which_deck);
 }
 
-function add_card_item(which_deck){
-  for(let id = 0; id < dom_info["count"][which_deck]; id++){
-    let val_name = $("#" + dom_info["name"][which_deck] + id).val();
-    if(val_name.length == 0) return;
+function add_card_item(which_deck, bypass_test=false){
+  if(!bypass_test){
+    for(let id = 0; id < dom_info["count"][which_deck]; id++){
+      let val_name = $("#" + dom_info["name"][which_deck] + id).val();
+      if(val_name.length == 0) return;
+    }
   }
 
-  let html = '<div class="row" id="' + dom_info["item"][which_deck] + dom_info["count"][which_deck] + '"><div class="three columns"><input class="u-full-width" type="number" min="1" max="3" value="3" id="' + dom_info["amount"][which_deck] + dom_info["count"][which_deck] + '"></div><div class="nine columns"><input class="u-full-width" type="text" placeholder="Enemy Controller" id="' + dom_info["name"][which_deck] + dom_info["count"][which_deck] + '"></div></div>';
+  let html = '<div class="row" id="' + dom_info["item"][which_deck] + dom_info["count"][which_deck] + '"><div class="three columns"><input class="u-full-width" type="number" min="1" max="3" value="3" id="' + dom_info["amount"][which_deck] + dom_info["count"][which_deck] + '"></div><div class="nine columns"><input class="u-full-width" type="text" placeholder="Card Name" id="' + dom_info["name"][which_deck] + dom_info["count"][which_deck] + '"></div></div>';
 
   dom_info["count"][which_deck]++;
 
@@ -96,8 +98,8 @@ function update_requests(){
 function update_deck_text(deck_json) {
   let deck = Deck.from_json(deck_json);
 
-  for(let i = 0; i < deck.main.length; i++) add_card_item("main");
-  for(let i = 0; i < deck.extra.length; i++) add_card_item("extra");
+  for(let i = 0; i < deck.main.length; i++) add_card_item("main", true);
+  for(let i = 0; i < deck.extra.length; i++) add_card_item("extra", true);
 
   for(let i = 0; i < deck.main.length; i++){
     $("#" + dom_info["name"]["main"] + i).val(deck.main[i].name);
@@ -138,9 +140,5 @@ $(function(){
     if(!token) return twitch.rig.log('Not authorized');
     update_requests();
     $.ajax(requests.set);
-  });
-
-  twitch.listen('broadcast', function (target, content_type, deck) {
-    update_deck_text(deck);
   });
 });
