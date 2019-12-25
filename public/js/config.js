@@ -21,8 +21,7 @@ function update_card_items(which_deck){
 }
 
 function add_card_item(which_deck, name="", amount=3){
-  let html = '<li><div class="row card-item"><div class="three columns"><input class="u-full-width" type="number" value="' + amount + '"></div><div class="nine columns"><input class="u-full-width" type="text" value="' + name + '" placeholder="Card Name"></div></div></li>';
-
+  let html = '<li><div class="row card-item"><div style="margin-right:3%;" class="one columns"><img src="icons/baseline_unfold_more_black_18dp.png"/></div><div class="three columns"><input class="u-full-width" type="number" value="' + amount + '"></div><div class="seven columns"><input class="u-full-width" type="text" value="' + name + '" placeholder="Card Name"></div></div></li>';
   $(html).focusout(function(){
     update_card_items(which_deck);
   }).appendTo(target_dom[which_deck]);
@@ -42,7 +41,6 @@ function update_requests(){
   $(target_dom["main"]).children().each(function(){
     let name_val = $(this).find("input[type='text']").val();
     let amt_val = $(this).find("input[type='number']").val();
-
     if(name_val.length > 0){
       deck.main.push({
         "name": name_val,
@@ -54,7 +52,6 @@ function update_requests(){
   $(target_dom["extra"]).children().each(function(){
     let name_val = $(this).find("input[type='text']").val();
     let amt_val = $(this).find("input[type='number']").val();
-
     if(name_val.length > 0){
       deck.extra.push({
         "name": name_val,
