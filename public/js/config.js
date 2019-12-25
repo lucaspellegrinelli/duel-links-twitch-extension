@@ -94,6 +94,7 @@ twitch.onAuthorized((auth) => {
   token = auth.token;
   userId = auth.userId;
 
+  $('#set-deck').attr("class", "u-full-width button-primary")
   $('#set-deck').removeAttr('disabled');
 
   update_requests();
